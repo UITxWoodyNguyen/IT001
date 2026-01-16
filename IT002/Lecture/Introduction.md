@@ -95,3 +95,95 @@
         
         - Biến `protectedVar` và hàm `protectedMethod()` là 2 members được protect trong class `Base`. Do đó các members này sẽ không sử dụng được trong `main`.
         - class `Derived` là `subclass` của `Base`, do đó các members được protect trong class `Base` có thể được sử dụng trong subclass `Derived`. 
+
+## Inheritance (Tính kế thừa)
+- **Tính kế thừa** là khả năng tạo một `class` mới dựa trên `class` hiện có, với các thuộc tính (attributes) và phương thức (method) hiện có. 
+- Usage: Tính kế thừa hoạt động khi sử dụng cho 2 hay nhiều đối tượng có đặc điểm chung.
+- Syntax:
+    ```c++
+    class BaseClass {
+        access_modifer; // (private/public/protected)
+            <data_type> <var_name>;
+    };
+
+    class SubClass: public BaseClass {
+        access_modifer;
+            <data_type> <var_name>;
+    }
+    ```
+
+- Ví dụ:
+
+    - Có 2 class `student` và `teacher` như sau:
+        ```c++
+        class student {
+            public:
+                string name;
+                int age;
+                string address;
+                double gpa;
+                string getName();
+                int getAge();
+                string getAddress();
+                double getGPA();
+                string setName (string new_name);
+                int setAge (int new_age);
+                string setAddress (string new_add);
+                double setGPA (double new_gpa);
+                void display();
+        };
+        ```
+
+        ```c++
+        class teacher {
+            public:
+                string name;
+                int age;
+                string address;
+                int salary;
+                string getName();
+                int getAge();
+                string getAddress();
+                int getSalary();
+                string setName (string new_name);
+                int setAge (int new_age);
+                string setAddress (string new_add);
+                int setSalary (int new_salary);
+                void display();
+        };
+        ```
+
+    - Nhận xét: 2 class có khá nhiều attributes và method chung. Do đó ta có thể tạo một class mới `person` lưu những điểm chung của 2 class trên.
+    - Khi đó, 2 class `student` và `teacher` sẽ kế thừa class `person` và 2 class này sẽ có những attributes và method của class `person`.
+    - Nói cách khác, lúc này `person` là **base class** và `teacher`, `student` là **sub class/devire class**.
+    - Source code:
+        ```c++
+        class Person {
+            public:
+                string name;
+                int age;
+                string address;
+
+                string getName();
+                int getAge();
+                string getAddress();
+                string setName (string new_name);
+                int setAge (int new_age);
+                string setAddress (string new_add);
+                void display();
+        };
+
+        class student: public Person {
+            public:
+                double GPA;
+                double getGPA();
+                double setGPA (double new_gpa);
+        };
+
+        class teacher: public Person {
+            public:
+                int salary;
+                int getSalary();
+                int setSalary (int new_salary);
+        };
+        ```
