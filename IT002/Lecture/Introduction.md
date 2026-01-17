@@ -187,3 +187,153 @@
                 int setSalary (int new_salary);
         };
         ```
+
+## Polymorphism (Tính đa hình)
+- Tính đa hình thể hiện khi một phương thức/đối tượng có nhiều hơn một hình thái/vai trò.
+- Khi đó, một thao tác/thuộc tính có thể được định nghĩa tại nhiều class và có những cài đặt khác nhau cho mỗi class.
+
+### Đa hình với nạp chồng phương thức
+- Ví dụ: Ta có class `Calculator` với các phương thức là cộng 2 số nguyên, 3 số nguyên và 2 số thực. Có thể thấy, biểu hiện của tính đa hình thể hiện qua việc cả 3 thao tác đều là phương thức cộng nhưng có nhiều hình thái khác nhau.
+
+    ```c++
+    #include <iostream>
+    using namespace std;
+
+    class Calc {
+        public:
+            int add (int a, int b) {
+                return a + b;
+            }
+
+            int add (int a, int b, int c) {
+                return a + b + c;
+            }
+
+            double add (double a, double b) {
+                return a + b;
+            }
+    };
+
+    int main () {
+        Calc calculator;
+
+        cout << calculator.add(2, 5) << endl; // sum of 2 integers
+        cout << calculator.add(2, 3, 4) << endl; // sum of 3 integers
+        cout << calculator.add(1.2, 3.4) << endl; // sum of 2 doubles
+
+        return 0;
+    }
+    ```
+
+### Đa hình với ghi đè phương thức 
+- Biểu hiện: Các class khác nhau sở hữu một hoặc nhiều phương thức giống nhau.
+- Ví dụ: Xét phương thức `salary` trong 2 class sau
+    ```c++
+    #include <iostream>
+    using namespace std;
+
+    class Employee {
+        private:
+            string name;
+            int salary;
+        
+        public:
+            Employee(string _name, int _salary) {
+                this->name = _name;
+                this->salary = _salary;
+            }
+
+            string getName() { return name; }
+            int getSalary() { return salary; }
+            string setName (string _name) { this->name = _name; }
+            int getSalary (int _salary) { this->salary = _salary; }
+
+            void setInfo(string _name, int _salary) {
+                this->name = _name;
+                this->salary = _salary;
+            }
+    };
+
+    class Manager : public Employee {
+        private:
+            int bonus;
+        
+        public:
+            Manager(string _name, int _salary, int _bonus) : Employee(_name, _salary) {
+                this->bonus = _bonus;
+            }
+
+            int getBonus() { return bonus; }
+            void setBonus(int _bonus) { this->bonus = _bonus; }
+            int getSalary() { return Employee::getSalary() + bonus; } // Overriding getSalary method
+    };
+
+    int main () {
+        Employee emp("Alice", 50000);
+        Manager mgr("Bob", 70000, 15000);
+
+        cout << "Employee: " << emp.getName() << ", Salary: " << emp.getSalary() << endl;
+        cout << "Manager: " << mgr.getName() << ", Salary: " << mgr.getSalary() << endl;
+
+        return 0;
+    }
+    ```
+
+    - Nhận xét: với cùng một phương thức `getSalary()` nhưng lại được định nghĩa theo 2 cách khác nhau trong 2 class.
+
+### Đa hình thông qua các đối tượng đa hình
+- Biểu hiện: Biến thuộc BaseClass có thể tham chiếu tới đối tượng của các SubClass, do đó biến này có thể có nhiều hình thái.
+- Ví dụ: Ta có sơ đồ như sau
+    ```
+    Animal
+    └── makeSound()
+        ├── Dog   → bow wow
+        ├── Cat   → meow meow
+        └── Duck  → quack quack
+    ```
+
+    - Ở đây, phương thức `makeSound()` là phương thức chung cho tất cả các `Animal`, và mỗi SubClass của `Animal` sẽ có một đặc tính riêng đối với phương thức này.
+    - Source code cụ thể:
+        ```c++
+        #include <iostream>
+        using namespace std;
+
+        class Animal {
+            public:
+                virtual void makeSound() {
+                    cout << "Random Sound" << endl;
+                }
+        };
+
+        class Dog : public Animal {
+            public: 
+                void makeSound() {
+                    cout << "Woof" << endl;
+                }
+        };
+
+        class Cat : public Animal {
+            public:
+                void makeSound() {
+                    cout << "Meow" << endl;
+                }
+        };
+
+        class Duck : public Animal {
+            public:
+                void makeSound() {
+                    cout << "Quack" << endl;
+                }
+        };
+
+        int main () {
+            Animal* animal[] = {
+                new Dog(),
+                new Cat(),
+                new Duck()
+            };
+
+            for(Animal* id : animal) id->makeSound(); // Polymorphic call
+            return 0;
+        }
+        ```
