@@ -1,4 +1,4 @@
-# OOP Introduction
+# OOP's Nature
 
 ## Encapsulation (Tính đóng gói)
 - **Đóng gói** là cách tổ chức các thành viên data (thuộc tính) và các thành viên functions (phương thức) bằng cách đóng gói chúng trong một lớp duy nhất (`class`)
@@ -337,3 +337,5 @@
             return 0;
         }
         ```
+## Abstraction (Tính trừu tượng)
+- Trừu tượng hóa là cách nhìn khái quát hóa về một tập các đối tượng có chung các đặc điểm được quan tâm (bỏ qua những chi tiết không cần thiết). Nó cho phép ta giao tiếp với các thành phần của đối tượng mà không cần phải biết về cách mà các thành phần này được xây dựng. Trừu tượng hóa cũng có thể hiểu là cách chuyển một đối tượng trên thực tế thành các thành phần của OOP.
