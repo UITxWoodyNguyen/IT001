@@ -1,7 +1,8 @@
 import subprocess
 import os
 
-FILE_NAME = "CAMBIEN.cpp"  # Change this to your .cpp file name
+PROBLEM_NAME = "PHITIEU"
+FILE_NAME = f"{PROBLEM_NAME}.cpp"  # Change this to your .cpp file name
 
 def main():
     exe_file = os.path.splitext(FILE_NAME)[0]
