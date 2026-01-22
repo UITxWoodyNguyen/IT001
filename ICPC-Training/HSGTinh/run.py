@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-FILE_NAME = "PHATQUA.cpp"  # Change this to your .cpp file name
+FILE_NAME = "CAMBIEN.cpp"  # Change this to your .cpp file name
 
 def main():
     exe_file = os.path.splitext(FILE_NAME)[0]
@@ -22,6 +22,14 @@ def main():
     if run_proc.stderr:
         print("Program errors:")
         print(run_proc.stderr)
+
+    # Xóa file ELF sau khi chạy (chỉ trên Linux)
+    if os.name != 'nt' and os.path.exists(exe_file):
+        try:
+            os.remove(exe_file)
+            print(f"Deleted executable: {exe_file}")
+        except Exception as e:
+            print(f"Could not delete executable: {e}")
 
 if __name__ == "__main__":
     main()
