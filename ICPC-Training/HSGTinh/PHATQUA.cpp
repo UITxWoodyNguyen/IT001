@@ -18,11 +18,11 @@ int main () {
     for(int i = 1; i <= n; i++) cin >> a[i];
 
     int res = 0;
-    unordered_map<int,int> countSum;
+    unordered_map<int,int> countSum; // countSum[x] = number of pairs (i,j) such that a[i] + a[j] = x
     for(int k = 3; k < n; k++) {
-        int j = k-1;
-        for(int i = 1; i < j; i++) countSum[a[i] + a[j]]++;
-        for(int p = k + 1; p <= n; p++) res += countSum[a[p] - a[k]];
+        int j = k-1; // j is the right index of the pair (i,j)
+        for(int i = 1; i < j; i++) countSum[a[i] + a[j]]++; // add pairs (i,j) to the map
+        for(int p = k + 1; p <= n; p++) res += countSum[a[p] - a[k]]; // find pairs (i,j) such that a[i] + a[j] = a[p] - a[k]
     }
 
     cout << res;
