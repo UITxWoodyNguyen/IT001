@@ -11,7 +11,7 @@ int get_min (int a, int b, int c) {
     return min(a, min(b,c));
 }
 
-int update () {
+void update (int &res) {
     int curMax = -1;
     for(int i = 1; i <= n; i++) for(int j = 1; j <= m; j++) {
         if (!board[i][j]) {
@@ -20,7 +20,7 @@ int update () {
         } else dp[i][j] = 0;
     }
 
-    return curMax;
+    res = curMax;
 }
     
 
@@ -35,13 +35,14 @@ int main () {
 
     cin >> n >> m >> k;
     memset(board, 0, sizeof(board));
-    int res = update();
+    int res;
+    update(res);
     while (k--) {
         int row, col;
         cin >> row >> col;
         board[row][col] = 1;
 
-        if (dp[row][col] > 0) res = update();
+        if (dp[row][col] > 0) update(res);
         cout << res << "\n";
     }
 }
