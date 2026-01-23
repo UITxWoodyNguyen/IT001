@@ -1,6 +1,13 @@
 # Solution Đề thi HSG Tỉnh Đồng Nai - Bảng A - 2025-2026
 ###### Author: Woody Nguyen - VNUHCM - UIT
 
+## Đề gốc
+![Page-1](https://scontent.fsgn7-1.fna.fbcdn.net/v/t39.30808-6/618785565_122153568548933089_3013863053475970257_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=7JVf2kffAUcQ7kNvwH-WtRr&_nc_oc=AdkblnrUSMMcGNY98o4kb88eaJM9NuurBVLuw44lj7Q_wtjXfT8j4vN3BxSgQ2OU_F0&_nc_zt=23&_nc_ht=scontent.fsgn7-1.fna&_nc_gid=armrmN1LN3TIGF4l5aEqTw&oh=00_AfoT6QKqItlvGyQUkwXTdfaTxOz6Z5lcoWa5pGeYD5q5Hg&oe=6978B8DA)
+
+![Page-2](https://scontent.fsgn7-2.fna.fbcdn.net/v/t39.30808-6/616987166_122153568602933089_2408030185277333682_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=zrI084E40goQ7kNvwHX8ED1&_nc_oc=AdntJGe0CrQhXm0yYw5BnT0Wz1TyLstlAqOSlESjFSoOaD5Mfga4bY5kwq3PGZPsbyQ&_nc_zt=23&_nc_ht=scontent.fsgn7-2.fna&_nc_gid=7YzMXNQStq2kkSgR-g5hgA&oh=00_AfoLvjleE34FN82bWX0LAtD74RL2suovDuYLFpP2mHEsCA&oe=6978CA46)
+
+![Page-3](https://scontent.fsgn7-2.fna.fbcdn.net/v/t39.30808-6/616827631_122153568662933089_1688171235073114523_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EdBw5f0MhRgQ7kNvwHhZ08g&_nc_oc=AdnFSuv8JAKLQiGdl8j9md9IIcNUVE1fjzPAzTRsE6NNDLOG7YqkXHmp4h8EgcU_inQ&_nc_zt=23&_nc_ht=scontent.fsgn7-2.fna&_nc_gid=Xiqxii7GyW0WqLa1M2YkjQ&oh=00_AfpvE9JEdYDwDCjxZe2jA8OAyvdchepMnbUh1wC4LkVGJA&oe=69780398)
+
 ## Bài 1: PHATQUA
 - Tóm tắt đề: Cho số nguyên $N$ và dãy $A[1], A[2], ..., A[N]$. Sắp xếp lại dãy $A$ và đếm số phần tử thoả mãn điều kiện với mọi `i` thoả $1 \le i \le n$; $i = A[i]$.
 - Giới hạn: $0 \le N \le 10^6$, $0 \le A[i] \le 10^9$
