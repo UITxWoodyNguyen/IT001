@@ -15,7 +15,7 @@
     
     - Thực hiện sắp xếp lại dãy $A$ (dùng hàm `sort()`)
     - Sau khi sắp xếp, duyệt lại qua dãy $A$ và đếm số phần tử thoả mãn điều kiện trên.
-- Source code: [`PHATQUA.cpp`](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/HSGTinh/CAMBIEN.cpp)
+- Source code: [`PHATQUA.cpp`](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/HSGTinh/PHATQUA.cpp)
 
 ## Bài 2: HANGRAO
 - Tóm tắt đề: Cho 2 số nguyên $N$ và $K$. Đếm số lượng số nguyên $M$ ($1 \le M \le K$) sao cho $N \cdot M$ là một số chính phương.
@@ -62,7 +62,7 @@
     - Sử dụng vòng lặp với biến $k$ để thực hiện đếm tất cả các tổng $s = A[i] + A[j]$ (*tính vế trái của biểu thức trong "Nhận xét"*), trong đó $i < j < k$. 
     - Tuy nhiên với mỗi $k$, việc sử dụng thêm 2 vòng lặp lần lượt cho $i$ và $j$ sẽ làm tăng độ phức tạp. Do đó, ta cố định $j = k-1$ để thực hiện đếm, vì khi $k$ tăng, $j$ cũng sẽ tăng kéo theo việc `countSum[s]` sẽ được tính thêm một lần.
     - Sau khi tính xong vế trái, dùng thêm một vòng for với biến $t$ để cộng dồn tổng số lượng các cặp số thoả mãn.
-- Source code: [`CAMBIEN`](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/HSGTinh/PHATQUA.cpp)
+- Source code: [`CAMBIEN`](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/HSGTinh/CAMBIEN.cpp)
 
 ## Bài 4: PHITIEU
 - Tóm tắt đề: Cho một bảng $A$ kích thước $N \cdot M$ gồm các ô $(i,j)$ có $A[i][j] = 0$ và $K$ truy vấn. Với mỗi truy vấn có dạng $(r,c)$, thực hiện đổi trạng thái $A[r][c] = 1$. Sau mỗi truy vấn, tính kích thước hình vuông lớn nhất chứa toàn trạng thái $0$.
