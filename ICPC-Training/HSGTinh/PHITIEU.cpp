@@ -4,12 +4,12 @@ using namespace std;
 const string FILE_NAME = "test";
 const int MAXN = 350+36;
 int n,m,k;
-bool board[MAXN][MAXN]; // board[i][j] = 1 neu o (i,j) co bong no
-int dp[MAXN][MAXN]; // dp[i][j] = kich thuoc o vuong lon nhat co goc duoi phai la (i,j)
 
 class subtask_1 {
     /* N, M <= 50*/
     private: 
+        bool board[MAXN][MAXN]; // board[i][j] = 1 neu o (i,j) co bong no
+        int dp[MAXN][MAXN]; // dp[i][j] = kich thuoc o vuong lon nhat co goc duoi phai la (i,j)
         int get_min (int a, int b, int c) {
             return min(a, min(b,c));
         }
@@ -52,12 +52,14 @@ class SEGTREE {
             if (leftY == rightY) {
                 if (leftX == rightX) segTree[nodeX][nodeY] = val;
                 else segTree[nodeX][nodeY] = max(segTree[nodeX * 2][nodeY], segTree[nodeX * 2 + 1][nodeY]);
-            } else {
-                int midY = (leftY + rightY) / 2;
-                if (y <= midY) update_y(nodeX, leftX, rightX, nodeY * 2, leftY, midY, x, y, val);
-                else update_y(nodeX, leftX, rightX, nodeY * 2 + 1, midY + 1, rightY, x, y, val);
-                segTree[nodeX][nodeY] = max(segTree[nodeX][nodeY * 2], segTree[nodeX][nodeY * 2 + 1]);
-            }
+                return;
+            } 
+
+            int midY = (leftY + rightY) / 2;
+            if (y <= midY) update_y(nodeX, leftX, rightX, nodeY * 2, leftY, midY, x, y, val);
+            else update_y(nodeX, leftX, rightX, nodeY * 2 + 1, midY + 1, rightY, x, y, val);
+    
+            segTree[nodeX][nodeY] = max(segTree[nodeX][nodeY * 2], segTree[nodeX][nodeY * 2 + 1]);
         }
 
         // Update row
@@ -89,9 +91,10 @@ class SEGTREE {
         }
 };
 
+SEGTREE segtree;
+
 bool check(int L) {
     if (L <= 0) return true;
-    SEGTREE segtree;
     for (int i = 1; i <= n - L + 1; ++i) {
         for (int j = 1; j <= m - L + 1; ++j) {
             if (segtree.query_x(1, 1, n, i, i + L - 1, j, j + L - 1) == 0) return true;
@@ -110,7 +113,7 @@ int main () {
     }
 
     cin >> n >> m >> k;
-    
+
     // if (n <= 50 && m <= 50) {
     //     subtask_1 solver;
     //     solver.solve();
@@ -124,7 +127,6 @@ int main () {
         query.push_back({r,c});
     }
 
-    SEGTREE segtree;
     for (const auto& p : query) {
         int row = p.first;
         int col = p.second;
