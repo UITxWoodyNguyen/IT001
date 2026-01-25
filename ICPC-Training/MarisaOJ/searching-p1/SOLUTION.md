@@ -106,3 +106,43 @@
     - Với mỗi giá trị $x$, thực hiện binary search để tìm index nhỏ nhất sao cho $pos[x][index] \ge l$ (đặt là $en_{pos}$) và index lớn nhất sao cho $pos[x][index] \le r$ (đặt là $st_{pos}$).
     - Kết quả cần tìm là $en_{pos} - st_{pos} + 1$.
 - Source code: [COUNTQUERY.cpp](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/MarisaOJ/searching-p1/problem79.cpp)
+
+## [Đếm cặp](https://marisaoj.com/problem/80)
+- Tóm tắt đề: Cho dãy $A$ gồm $N$ phần tử. Đếm số cặp $(i,j)$ sao cho $i < j$, $l \le A[i] + A[j] \le r$
+- Giới hạn: $1 \le N \le 10^5$, $1 \le A[i], l, r \le 10^9$
+- Solution:
+
+    - Từ đề bài ta có $l \le A[i] + A[j] \le r \Rightarrow l - A[i] \le A[j] \le r - A[i]$. Đặt $low = l - A[i]$ và $high = r - A[i]$. 
+    - Lúc này problem trở thành đếm số vị trí $j$ sao cho $low \le A[j] \le high$ (Giống với bài "[Truy vấn đếm](https://marisaoj.com/problem/79)")
+- Source code: [DEMCAP.cpp](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/MarisaOJ/searching-p1/problem80.cpp)
+
+## [Viên kẹo thứ k](https://marisaoj.com/problem/81)
+- Tóm tắt đề: Cho $N$ số nguyên trong khoảng $[1...N]$ và $Q$ truy vấn. Tạo một dãy mới (đặt là $newA[]$) với yêu cầu sau:
+
+    - Với mỗi số nguyên $i$ ($1 \le i \le N$), thực hiện viết lại $a[i]$ lần cho mỗi số $i$
+    - Trọng số của mỗi số nguyên $i$ là $w[i]$
+    - Ví dụ:
+        ```
+        i = 1: a[1] = 2, w[1] = 1
+        i = 2: a[2] = 1, w[2] = 0
+        --> Mảng viết lại là [1, 1, 2]. 
+        --> Trọng số với mỗi phần tử là [1, 1, 0]
+        ```
+    - Với mỗi truy vấn có dạng $k$, xác định trọng số của $newA[k]$
+- Giới hạn: 
+
+    - $1 \le N, Q \le 10^5$
+    - $1 \le A[i], w[i] \le 10^9$, 
+    - $1 \le k \le A[1] + A[2] + ... + A[n] \le 10^{14}$
+- Solution:
+    - Tạo một `struct` để quản lý đối với mỗi giá trị $i$ (đặt là 1 $node$) bao gồm 2 đối tượng là $num$ và $weight$:
+        ```c++
+        struct Candies {
+            long long num, weight;
+        };
+        ```
+    - Gọi $pfs[i]$ là số lượng giá trị trong dãy $newA[]$ sau khi thêm vào $a[i]$ giá trị $i$. Công thức: $pfs[i] = pfs[i-1] + node[i].num$
+    - Với mỗi truy vấn, binary search để tìm index lớn nhất sao cho $pfs[index] \ge k$ (tức số lượng phần tử trong $newA$ vượt quá $k$). 
+    - Khi đó, trọng số cần tìm sẽ là $node[index].weight$
+- Source code: [CANDIES.cpp](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/MarisaOJ/searching-p1/problem81.cpp)
+
