@@ -146,3 +146,76 @@
     - Khi đó, trọng số cần tìm sẽ là $node[index].weight$
 - Source code: [CANDIES.cpp](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/MarisaOJ/searching-p1/problem81.cpp)
 
+## [Cạnh tam giác](https://marisaoj.com/problem/85)
+- Tóm tắt đề: Cho dãy $A$ gồm $N$ số nguyên. Đếm bộ số $(i,j,k)$ sao cho $i < j < k$ và $(A[i], A[j], A[k])$ tạo thành một tam giác
+- Giới hạn: $1 \le N \le 1500$, $1 \le A[i] \le 10^9$
+- Solution:
+
+    - Nhận xét: Theo bất đẳng thức tam giác, tổng 2 cạnh bất kì lớn hơn cạnh còn lại sẽ tạo thành một tam giác. Do đó trong bộ ba $(i,j,k)$ bất kì, ta có thể chọn 2 trong 3 số mà không cần quan tâm tới vị trí.
+    - Thực hiện sort lại dãy $A$, dùng vòng lặp để tính $A[i] + A[j]$ và binary search từ $j+1$ tới $N$ để tìm index lớn nhất sao cho $A[index]$ thoả mãn bất đẳng thức. Số giá trị $A[k]$ thoả mãn với mỗi cặp $(i, j)$ sẽ là $index - j$.
+- Source code: [TRIANGLE.cpp](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/MarisaOJ/searching-p1/problem85.cpp)
+
+## [Số Hamming](https://marisaoj.com/problem/82)
+- Tóm tắt đề: **Số Hamming** là số có dạng $x = 2^a \cdot 3^b \cdot 5^c$. Cho $Q$ truy vấn, mỗi truy vấn có dạng $m$. Tìm vị trí của $m$ trong dãy số Hamming.
+- Giới hạn: $1 \le Q \le 10^5$, $1 \le m \le 10^{18}$
+- Solution:
+
+    - Nhận xét: Do số lượng số hamming là rất ít nên ta thực hiện sinh ra một list số Hamming và thực hiện binary search để tìm vị trí của m trên list đó.
+    - Cách sinh số Hamming:
+        ```c++
+        void generateNum() {
+            set<long long> s;
+            s.insert(1);
+            hammingNumber.push_back(1);
+            for (auto it = s.begin(); it != s.end(); ++it) {
+                long long current = *it;
+                if (current > 1e18) break;
+                for (int factor : {2, 3, 5}) {
+                    long long next = current * factor;
+                    if (next <= 1e18 && s.find(next) == s.end()) {
+                        s.insert(next);
+                        hammingNumber.push_back(next);
+                    }
+                }
+            }
+            sort(hammingNumber.begin(), hammingNumber.end());
+        }
+        ```
+- Source code: [HAMMING.cpp](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/MarisaOJ/searching-p1/problem82.cpp)
+
+## Số nguyên liên tiếp
+- Tóm tắt đề: Cho dãy $A$ gồm $N$ số nguyên. Tìm số lượng phần tử cần thay đổi ít nhất để $A$ gồm các số nguyên liên tiếp.
+- Giới hạn: $1 \le N \le 10^5$, $1 \le A[i] \le 10^9$
+- Solution:
+
+    - Nhận xét:
+
+        - Một dãy số nguyên liên tiếp sẽ không có 2 phần tử nào trùng nhau.
+        - Với mỗi số $x$ bất kì, để tạo một dãy các số nguyên liên tiếp độ dài $n$ thì số lớn nhất thuộc dãy là $x + n - 1$.
+    - Từ nhận xét, ta thực hiện `sort()` lại dãy $A$ và xoá các phần tử trùng lặp.
+    - Với mỗi $A[i]$, từ nhận xét trên, ta tính được giá trị lớn nhất cần phải giữ là $maxVal = A[i] + N - 1$. Thực hiện binary search để tìm index nhỏ nhất sao cho $A[index] > maxVal$
+    - Từ đó ta tính được số lượng phần tử cần giữ lại là $keep[i] = index - i + 1$.
+    - Đáp án của bài toán là $N - max(keep[1], keep[2], ..., keep[n])$
+- Source code: [CONTNUM.cpp](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/MarisaOJ/searching-p1/problem197.cpp)
+
+## [Khoảng cách Gnimmah](https://marisaoj.com/problem/83)
+- Tóm tắt đề: Cho 2 xâu $a$ và $b$. Tính khoảng cách Grimnah của các xâu con độ dài $|b|$ của $a$.
+    > Khoảng cách Grimnah của 2 xâu $s$ và $t$ là số vị trí mà tại đó $s[i] = t[i]$
+- Giới hạn: Độ dài xâu không vượt quá $10^5$
+- Solution:
+
+    - Gọi $pfs[i][c] : (0 < i < |a|, 0 \le c < 26)$ là số lần xuất hiện của kí tự $c$ trong $a[0...i-1]$
+    - Với mỗi $b[i]$, ta tính được số lượng substring chứa $b[i]$ trong $a$ là $pfs[i + cntSubtring][b[i]] - pfs[i][b[i]]$ với $cntSubstring = |a| - |b| + 1$ là số substring độ dài $|b|$ của $a$.
+- Source code: [GRIMAH.cpp](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/MarisaOJ/searching-p1/problem83.cpp)
+
+## [Đoạn con](https://marisaoj.com/problem/637)
+- Tóm tắt đề: Cho dãy $A$ gồm $N$ số nguyên và số $S$. Tìm cặp $[l,r]$ sao cho $r - l + 1$ đạt max và $A[l] + A[l+1] + ... + A[r] \le S$
+- Giới hạn: $1 \le N \le 2 \cdot 10^5$, $0 \le |a|, |S| \le 10^9$
+- Solution:
+
+    - Gọi $pfs[i] = a[1] + a[2] + ... + a[i]$
+    - Từ đề bài ta thực hiện biến đổi $pfs[r] - pfs[l-1] \le S \Rightarrow pfs[l-1] \ge pfs[r] - S$
+    - Nhận xét: với mọi $k$ sao cho $pfs[k]$ thoả mãn điều kiện trên, nếu $pfs[k+1] < pfs[k]$, $pfs[k+1]$ sẽ không thoả điều kiện, do đó ta có thể bỏ qua không cần xét tới những giá trị tương tự trường hợp này
+    - Từ nhận xét trên, tạo một danh sách các $pfs[i]$ với điều kiện $i < j$ và $pfs[i] < pfs[j]$, tức duy trì các giá trị $pfs[i]$ tăng dần. Dùng `struct` để lưu lại vị trí gốc của các $pfs[i]$
+    - Thực hiện binary search trên list giá trị này để tìm index nhỏ nhất sao cho $pfs[index] \ge pfs[r] - S$. Truy xuất lại vị trí gốc để tính được độ dài subsequences và lấy max.
+- Source code: [SUBSEQ.cpp](https://github.com/UITxWoodyNguyen/Courses-Self-Learning/blob/main/ICPC-Training/MarisaOJ/searching-p1/problem637.cpp)
