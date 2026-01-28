@@ -118,3 +118,26 @@
     - Tổng số phần bánh có kích cỡ $x$ có thể cắt được từ $n$ chiếc bánh: $Total = \sum_{i=1}^{n} \lfloor \frac{A_i^2}{x} \rfloor$.
 - Source code: [CAKE.cpp]()
 
+## Sắp xếp hiệu 
+- Tóm tắt đề: Cho mảng $A$ gồm $n$ phần tử. Có tất cả $\frac{n(n-1)}{2}$ cặp giá trị tuyệt đối $|A_i - A_j|$. Cần tìm giá trị nhỏ thứ $k$ trong tất cả các hiệu này sau khi đã sắp xếp không giảm.
+- Giới hạn: $1 \le n \le 10^5$, $1 \le k \le \frac{n(n-1)}{2}$, $1 \le A_i \le 10^9$
+- Solution:
+
+    - Ta cần xác định giá trị $X$ sao cho có ít nhất $k$ cặp $(i, j)$ sao cho $|A_i - A_j| \le X$.
+    - Thực hiện sắp xếp mảng $A$ tăng dần. Ta có nhận xét, khi mảng đã được sắp xếp tăng dần $|A_i - A_j| \le X \Rightarrow A_j - A_i \le X \Rightarrow A_j \le A_i + X$. Từ đó ta cần tìm số giá trị $j$ tương ứng với mỗi vị trí $i$. (Dùng **2 pointers**)
+    - Binary search để tìm giá trị $X$ thoả mãn.
+- Source code: [SUB.cpp]()
+
+## Thu thập
+- Tóm tắt đề: Cho $n$ món đồ, mỗi món có giá trị $v_i$ và cân nặng $w_i$. Cần chọn đúng $k$ món sao cho tỉ số giữa tổng giá trị và tổng cân nặng là lớn nhất: $\frac{\sum v_{selected}}{\sum w_{selected}} \to \max$.
+- Giới hạn:
+
+    - $n, k$ ($1 \le k \le n \le 10^5$).
+    - $n$ cặp $(v_i, w_i)$ ($1 \le v_i, w_i \le 10^9$).
+- Solution: 
+
+    - Giả sử tỉ số tối ưu là $X$. Ta cần tìm $X$ lớn nhất sao cho tồn tại một cách chọn $k$ món thỏa mãn:
+        $$\frac{\sum v_i}{\sum w_i} \ge X \iff \sum v_i \ge X \cdot \sum w_i \iff \sum (v_i - X \cdot w_i) \ge 0$$
+    - Với mỗi giá trị $X$ cố định, ta tính giá trị mới $f_i = v_i - X \cdot w_i$ cho từng món đồ. Để tổng $k$ món lớn nhất, ta chỉ cần chọn $k$ món có $f_i$ lớn nhất. Nếu tổng này $\ge 0$, nghĩa là tỉ số $X$ có thể đạt được hoặc cao hơn.
+- Source code: [DIV.cpp]()
+
