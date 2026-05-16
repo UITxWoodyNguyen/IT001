@@ -1,0 +1,6 @@
+﻿  CDsVatChu.cpp
+  CVatChu.cpp
+D:\UIT\Courses UIT\Subject\Courses-Self-Learning\Courses-Self-Learning\IT002\LAB\Virus-preOOP2324\Project\CVatChu.cpp(118,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  source.cpp
+  Generating Code...
+  Project.vcxproj -> D:\UIT\Courses UIT\Subject\Courses-Self-Learning\Courses-Self-Learning\IT002\LAB\Virus-preOOP2324\x64\Debug\Project.exe
